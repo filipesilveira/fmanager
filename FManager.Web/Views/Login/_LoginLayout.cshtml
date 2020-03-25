@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/BlackDashboard/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="~/BlackDashboard/assets/img/favicon.png">
+    <title>FManager - Login</title>
+
+    <!-- Fonts and icons -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    @Styles.Render("~/Content/css")
+</head>
+<body ng-app="FManagerApp">
+    <div ng-controller="LoginRouteCtrl" class="wrapper" style="display: none">
+        <div class="main-panel login">
+
+            <div class="content" ng-view></div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="copyright">
+                        FManager ©
+                        <script>document.write(new Date().getFullYear())</script>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div class="loading-indicator">
+        <div class="showbox">
+            <div class="loader">
+                <img src="/Images/loading-indicator.gif" />
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop fade in" style="z-index: 9998"></div>
+
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/BaseScripts")
+    @Scripts.Render("~/bundles/LoginScripts")
+</body>
+</html>

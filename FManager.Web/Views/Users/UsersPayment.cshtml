@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="row" ng-controller="UsersCtrl as vm">
+    <div class="col-sm-12 col-md-8 offset-md-2" id="login-container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="title">PAGAMENTO</h4>
+            </div>
+            <div class="card-body" ng-if="!vm.paymentUrl">
+                <form name="usersForm" ng-submit="vm.payment()" style="margin-bottom:0">
+                    <div class="row">
+                        <div class="col-md-12" ng-repeat="paymentPlan in vm.paymentPlans">
+                            <label>
+                                <input type="radio"
+                                       value="{{paymentPlan.PaymentPlanId}}"
+                                       ng-model="vm.PaymentData.PaymentPlanId" />
+                                {{paymentPlan.Description}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit"
+                                    class="btn btn-info">
+                                Salvar
+                            </button>
+                            <a href="#/" class="float-right" style="margin-top: 15px">Voltar para o login</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-body" ng-if="vm.paymentUrl">
+                <div class="row">
+                    <div class="col-xs-12">
+                        Estamos aguardando a confirmação do seu pagamento, clique no botão abaixo caso ainda não tenha finalizado.
+                        Caso já tenha finalizado por favor aguarde que em breve seu acesso será liberado.
+                        <a ng-href="{{vm.paymentUrl}}" class="float-right">Realizar Pagamento</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <loading-indicator busy="vm.showLoadingIndicator"></loading-indicator>
+</div>

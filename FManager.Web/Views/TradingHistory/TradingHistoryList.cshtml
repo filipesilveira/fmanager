@@ -1,0 +1,129 @@
+﻿@{
+    Layout = null;
+}
+<div ng-controller="TradingHistoryCtrl">
+    <form name="tradingHistoryForm" ng-submit="initializeTable()">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            Filtros
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12" style="max-width: 240px">
+                                <label>Conta <span class="text-danger">*</span></label>
+                                <select ng-model="TradingHistoryData.AccountId"
+                                        ng-options="account.AccountId as account.Broker for account in AccountsCombobox"
+                                        class="form-control" required>
+                                    <option></option>
+                                </select>
+                            </div>
+                            <div class="col-md-12" style="max-width: 170px">
+                                <label>Data inicial</label>
+                                <input data-date-picker
+                                       type="text"
+                                       ng-model="TradingHistoryData.StartDate"
+                                       class="form-control" />
+                            </div>
+                            <div class="col-md-12" style="max-width: 170px">
+                                <label>Data final</label>
+                                <input data-date-picker
+                                       type="text"
+                                       ng-model="TradingHistoryData.EndDate"
+                                       class="form-control" />
+                            </div>
+                            <div class="col-md-12" style="max-width: 170px">
+                                <label>Dia da semana</label>
+                                <select ng-model="TradingHistoryData.DayOfWeek"
+                                        ng-options="dayOfWeek.DayOfWeekId as dayOfWeek.Name for dayOfWeek in DayOfWeekCombobox"
+                                        class="form-control"></select>
+                            </div>
+                            <div class="col-md-12" style="max-width: 245px">
+                                <label>Paridade</label>
+                                <select ng-model="TradingHistoryData.ParityId"
+                                        ng-options="parity.ParityId as parity.Name for parity in ParitiesCombobox"
+                                        class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit"
+                                        class="btn btn-sm btn-fill btn-info">
+                                    Buscar
+                                </button>
+                                <button type="button"
+                                        class="btn btn-sm btn-fill btn-info"
+                                        ng-click="TradingHistoryData = {}">
+                                    Limpar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="TradingHistory" style="margin-bottom: 30px; padding-right: 15px; padding-left: 15px">
+            <div class="col-xs-12 col-md-3">
+                <h5 style="margin-bottom:5px">Investimento Total</h5>
+                <h3 class="card-title"
+                    style="display:inline">
+                    {{TradingHistory.Investment | currency : TradingHistory.CurrencyName + ' ' : 2}}
+                </h3>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <h5 style="margin-bottom:5px">Lucro Total</h5>
+                <h3 class="card-title"
+                    ng-class="{'text-success': TradingHistory.Profit > 0, 'text-danger': TradingHistory.Profit <= 0}"
+                    style="display:inline">
+                    {{TradingHistory.Profit | currency : TradingHistory.CurrencyName + ' ' : 2}}
+                </h3>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <h5 style="margin-bottom:5px">Retorno Total</h5>
+                <h3 class="card-title"
+                    style="display:inline">
+                    {{TradingHistory.Equity | currency : TradingHistory.CurrencyName + ' ' : 2}}
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            Resultados
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table ng-table="tradingHistoryTableParams" class="table" style="margin-bottom: 0 !important" show-filter="false">
+                                    <tbody>
+                                        <tr ng-repeat="result in $data">
+                                            <td title="'Data e hora'">{{::result.DateAndTime | date: 'dd/MM/yyyy HH:mm'}}</td>
+                                            <td title="'Paridade'">{{::result.ParityName}}</td>
+                                            <td title="'Investimento'">{{::result.Value | currency : result.CurrencyName + ' ' : 2}}</td>
+                                            <td title="'Lucro'">
+                                                <span ng-class="{'text-success': result.Result > 0, 'text-danger': result.Result <= 0}">
+                                                    {{::result.Result | currency : result.CurrencyName + ' ' : 2}}
+                                                </span>
+                                            </td>
+                                            <td title="'Retorno'">{{::result.Equity | currency : result.CurrencyName + ' ' : 2}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="text-center" ng-if="!TradingHistory" style="margin-bottom: 15px">
+                                    <label>Nenhum resultado encontrado.</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+    </form>
+</div>

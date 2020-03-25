@@ -1,0 +1,29 @@
+﻿@{ 
+    Layout = null;
+}
+<div ng-controller="DayBooksListCtrl">
+    <div class="row">
+        <div class="col-md-6 col-lg-4" ng-repeat="dayBook in DayBooks">
+            <a href="{{'/#/daybooks/' + dayBook.DayBookId}}">
+                <div class="card card-chart" ng-click="edit(dayBook.DayBookId)" style="cursor: pointer">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="tim-icons icon-book-bookmark text-info"></i>
+                            {{dayBook.Name}}
+                        </h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="button"
+                    class="btn btn-fill btn-info"
+                    ng-click="add()">
+                + Novo diário
+            </button>
+        </div>
+    </div>
+    <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+</div>

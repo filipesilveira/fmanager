@@ -1,0 +1,168 @@
+﻿.modal-open .modal {
+    display: block !important;
+    overflow: auto
+}
+
+.main-panel{
+    border-top: 0px
+}
+
+.fade:not(.show) {
+    opacity: 1
+}
+
+.collapse.in{
+    display: initial !important
+}
+
+.modal-content {
+    margin-top: 285px;
+    background-color: initial
+}
+
+.modal-content .card, .modal-content form {
+    margin-bottom: 0px
+}
+
+.modal-content .card .card-header {
+    padding: 15px;
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+.modal-content .card .card-header h4.title, .card .card-header h4.card-title {
+    display: inline;
+}
+
+.modal-content .card .card-body {
+    padding-bottom: 0px;
+}
+
+.modal-backdrop {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.close {
+    color: #fff
+}
+
+.showbox {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999
+}
+
+.loader {
+    position: relative;
+    margin: 0px auto;
+    width: 85px;
+    margin-top: 15%
+}
+
+.loader:before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}
+
+.dropdown-menu.bootstrap-datetimepicker-widget.bottom{
+    visibility: visible;
+    opacity: 1
+}
+
+textarea.form-control {
+    max-height: none
+}
+
+.login #login-container {
+    margin: auto;
+    max-width: 450px
+}
+
+.login .content {
+    padding: 25px;
+    padding-top: 100px
+}
+
+select.form-control option{
+    color: #000
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: inherit;
+    display: block;
+}
+
+.ps {
+    overflow-anchor: initial
+}
+
+.form-control[readonly] {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.ng-table-counts.btn-group .btn.btn-default{
+    padding: 5px 15px
+}
+
+.pagination.ng-table-pagination li.active {
+    z-index: 1;
+    -webkit-transform: translateY(-1px)
+}
+
+.pagination.ng-table-pagination li a {
+    padding: 4px 15px;
+    border-color: #202c49;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    background: #344675;
+    background-image: -webkit-linear-gradient(to bottom left, #344675, #263148, #344675);
+    background-image: -o-linear-gradient(to bottom left, #344675, #263148, #344675);
+    background-image: -moz-linear-gradient(to bottom left, #344675, #263148, #344675);
+    background-image: linear-gradient(to bottom left, #344675, #263148, #344675);
+    background-size: 210% 210%;
+    background-position: top right;
+    background-color: #344675;
+    transition: all 0.15s ease;
+    color: #ffffff;
+    border-radius: 0.4285rem;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    font-size: 0.875rem;
+    line-height: 1.35em;
+    margin-left: -1px !important
+}
+
+.pagination.ng-table-pagination li:not(:last-child) a {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.pagination.ng-table-pagination li:not(:first-child) a {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

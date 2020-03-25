@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+<div ng-controller="AccountsListCtrl">
+    <div class="row">
+        <div class="col-sm-6 col-lg-4" ng-repeat="account in Accounts">
+            <a href="{{'/#/accounts/' + account.AccountId}}">
+                <div class="card card-chart" style="cursor: pointer">
+                    <div class="card-header">
+                        <h5 class="card-category">{{account.Broker}}</h5>
+                        <h3 class="card-title" style="display:inline">
+                            <i class="tim-icons icon-app text-info"></i>
+                            {{account.Balance | currency : account.CurrencyName + ' ' : 2}}
+                        </h3>
+                        <h5 ng-class="{'text-success': account.Percentage > 0, 'text-danger': account.Percentage < 0}"
+                            style="display:inline">
+                            ({{account.Percentage.toFixed(2)}}%)
+                        </h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="button"
+                    class="btn btn-fill btn-info"
+                    ng-click="add()">
+                + Nova banca
+            </button>
+        </div>
+    </div>
+    <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+</div>

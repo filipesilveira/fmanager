@@ -1,0 +1,126 @@
+﻿@{
+    Layout = null;
+}
+<div ng-controller="AccountsViewCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="tim-icons icon-app text-info"></i>
+                        &nbsp;{{AccountData.Broker}}
+                    </h4>
+                    <a href="/#/accounts" class="close">
+                        <i class="tim-icons icon-simple-remove"></i>
+                    </a>
+                    <button type="button"
+                            class="text-danger close"
+                            style="margin-right: 10px"
+                            ng-click="delete()">
+                        <i class="tim-icons icon-trash-simple"></i>
+                    </button>
+                    <button type="button"
+                            class="text-info close"
+                            style="margin-right: 10px"
+                            ng-click="edit()">
+                        <i class="tim-icons icon-pencil"></i>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                            <label>Resultado da banca</label>
+                            <br />
+                            <h3 class="card-title"
+                                style="display:inline">
+                                {{AccountData.Balance - AccountData.InitialInvestment | currency : AccountData.CurrencyName + ' ' : 2}}
+                            </h3>
+                            <h5 ng-class="{'text-success': AccountData.Percentage > 0, 'text-danger': AccountData.Percentage < 0}"
+                                style="display:inline">
+                                ({{AccountData.Percentage.toFixed(2)}}%)
+                            </h5>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                            <label>Investimento inicial</label>
+                            <br />
+                            <h3 class="card-title"
+                                style="display:inline">
+                                {{AccountData.InitialInvestment | currency : AccountData.CurrencyName + ' ' : 2}}
+                            </h3>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="chart-area" id="accountBalanceHistoryChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-6 no-padding-left">
+                            <h4 class="card-title">
+                                Sessões
+                            </h4>
+                            <a href="/#/accounts/{{accountId}}/new"
+                               class="btn btn-sm btn-fill btn-info"
+                               style="margin-right: 10px">
+                                + Nova sessão
+                            </a>
+                            <span type="button"
+                                  class="btn btn-sm btn-fill btn-info btn-file"
+                                  style="margin-right: 10px">
+                                Importar CSV
+                                <input type="file" file-reader="fileContent" />
+                            </span>
+                            <a href="/#/accounts/" class="btn btn-sm btn-fill btn-info">
+                                Voltar para lista
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 no-padding">
+                            <table ng-table="sectionsTableParams" class="table" show-filter="false">
+                                <tr ng-repeat="section in $data">
+                                    <td title="'Data'" style="width: 200px">
+                                        {{ !section.DateAndTime ? 'Nenhuma operação' : '' }} {{section.DateAndTime | date:"dd/MM/yyyy HH:mm"}}
+                                    </td>
+                                    <td title="'Número de entradas'">
+                                        {{section.TotalEntries}}
+                                    </td>
+                                    <td title="'Resultado ('+ AccountData.CurrencyName +')'">
+                                        <span ng-class="{'text-success': section.Result > 0, 'text-danger': section.Result < 0}">
+                                            {{section.Result.toFixed(2)}}
+                                        </span>
+                                    </td>
+                                    <td title="'%'">
+                                        <span ng-class="{'text-success': section.Result > 0, 'text-danger': section.Result < 0}">
+                                            {{section.Percentage.toFixed(2)}}%
+                                        </span>
+                                    </td>
+                                    <td title="'Ações'" style="width: 110px">
+                                        <a href="/#/accounts/{{accountId}}/{{section.SectionId}}"
+                                           class="btn btn-link text-info">
+                                            <i class="tim-icons icon-pencil"></i>
+                                        </a>
+                                        <button type="button"
+                                                class="btn btn-link text-danger"
+                                                ng-click="deleteSection(section.SectionId)">
+                                            <i class="tim-icons icon-trash-simple"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="text-center" ng-if="!sections.length">
+                                <label>Nenhuma sessão cadastrada.</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+</div>

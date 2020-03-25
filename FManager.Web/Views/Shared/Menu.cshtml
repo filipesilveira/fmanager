@@ -1,0 +1,20 @@
+﻿<div class="sidebar" data="blue">
+    <div class="sidebar-wrapper">
+        <div class="logo">
+            <a href="javascript:void(0)" class="simple-text logo-mini">
+                FM
+            </a>
+            <a href="javascript:void(0)" class="simple-text logo-normal">
+                FManager
+            </a>
+        </div>
+        <ul class="nav">
+            <li ng-repeat="menuItem in menuData" ng-class="{'active': pageTitle == menuItem.Name}">
+                <a href="{{menuItem.Url}}">
+                    <i class="{{menuItem.Icon}}"></i>
+                    <p>{{menuItem.Name}}</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

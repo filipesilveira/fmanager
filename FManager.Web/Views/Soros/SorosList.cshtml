@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+<div ng-controller="SorosCtrl">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 col-lg-2">
+                            <label>Investimento</label>
+                            <input type="number"
+                                   step="0.01"
+                                   ng-model="SorosData.Investment"
+                                   ng-change="updateData()"
+                                   class="form-control" />
+                        </div>
+                        <div class="col-md-12 col-lg-2">
+                            <label>Payout</label>
+                            <input step="0.01"
+                                   min="0"
+                                   max="100"
+                                   type="number"
+                                   ng-model="SorosData.Payout"
+                                   ng-change="updateData()"
+                                   class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table" ng-if="SorosData.Investment && SorosData.Payout">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5px">Entrada</th>
+                                        <th style="width: 5px">Copiar</th>
+                                        <th>Investimento</th>
+                                        <th>Lucro</th>
+                                        <th>Banca</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="soros in Soros">
+                                        <td class="text-center">{{$index + 1}}</td>
+                                        <td class="text-center">
+                                            <div ngclipboard
+                                                 data-clipboard-text="{{soros.Investment}}"
+                                                 style="cursor: pointer">
+                                                <i class="fa fa-copy"></i>
+                                            </div>
+                                        </td>
+                                        <td>{{soros.Investment}}</td>
+                                        <td>{{soros.Profit}}</td>
+                                        <td>{{soros.Total}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div ng-if="!SorosData.Investment || !SorosData.Payout" style="margin-bottom: 15px">
+                                <label>Preencha todos os campos corretamente.</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+</div>

@@ -1,0 +1,54 @@
+﻿@{
+    Layout = null;
+}
+
+<div ng-controller="AccountsCtrl">
+    <form name="accountForm" ng-submit="save()">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="title">
+                    {{accountId ? 'EDITAR' : 'NOVA'}}
+                    BANCA
+                </h4>
+                <button type="button" class="close" ng-click="dismissModal()">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+                <button type="button"
+                        class="text-danger close"
+                        style="margin-right: 10px"
+                        ng-if="entityId"
+                        ng-click="delete()">
+                    <i class="tim-icons icon-trash-simple"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Corretora</label>
+                        <input type="text" ng-model="AccountData.Broker" class="form-control" placeholder="Corretora" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-2">
+                        <label>Moeda</label>
+                        <select ng-model="AccountData.CurrencyId"
+                                ng-options="currency.CurrencyId as currency.Name for currency in CurrenciesCombobox"
+                                class="form-control"></select>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <label>Investimento Inicial</label>
+                        <input type="number"
+                               ng-model="AccountData.InitialInvestment"
+                               step="0.01"
+                               class="form-control"
+                               placeholder="Investimento Inicial" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-fill btn-info">Salvar</button>
+            </div>
+        </div>
+    </form>
+    <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+</div>

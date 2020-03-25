@@ -1,0 +1,171 @@
+﻿@{
+    Layout = null;
+}
+
+<div ng-controller="EntriesCtrl">
+    <form name="accountForm">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="title">
+                    {{entryId ? 'EDITAR' : 'NOVA'}}
+                    OPERAÇÃO
+                </h4>
+                <button type="button" class="close" ng-click="closeModal()">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+                <button type="button"
+                        class="text-danger close"
+                        style="margin-right: 10px"
+                        ng-if="entryId"
+                        ng-click="delete()">
+                    <i class="tim-icons icon-trash-simple"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row" style="margin-bottom: 15px">
+                    <div class="col-lg-4">
+                        <label>Resultado da sessão</label>
+                        <br />
+                        <h3 class="card-title"
+                            style="display:inline">
+                            {{SectionData.Result | currency : SectionData.CurrencyName + ' ' : 2}}
+                        </h3>
+                        <h5 ng-class="{'text-success': SectionData.Result > 0, 'text-danger': SectionData.Result < 0}"
+                            style="display:inline">
+                            ({{SectionData.Percentage.toFixed(2)}}%)
+                        </h5>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Win / loss</label>
+                        <h3 class="card-title">
+                            <i class="tim-icons icon-minimal-up text-success"></i> {{SectionData.TotalWin}}
+                            &nbsp;&nbsp;&nbsp;
+                            <i class="tim-icons icon-minimal-down text-danger"></i> {{SectionData.TotalLoss}}
+                        </h3>
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Operações</label>
+                        <h3 class="card-title">{{SectionData.TotalEntries}}</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-3">
+                        <label>0.5%</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="getAccountPercentage(0.5)"
+                                   id="percentage-05"
+                                   readonly />
+                            <div class="input-group-text"
+                                 ngclipboard
+                                 data-clipboard-target="#percentage-05"
+                                 style="height: 37px; border: 1px solid #2b3553; cursor: pointer">
+                                <i class="fa fa-copy"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <label>1%</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="getAccountPercentage(1)"
+                                   id="percentage-1"
+                                   readonly />
+                            <div class="input-group-text"
+                                 ngclipboard
+                                 data-clipboard-target="#percentage-1"
+                                 style="height: 37px; border: 1px solid #2b3553; cursor: pointer">
+                                <i class="fa fa-copy"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <label>2%</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="getAccountPercentage(2)"
+                                   id="percentage-2"
+                                   readonly />
+                            <div class="input-group-text"
+                                 ngclipboard
+                                 data-clipboard-target="#percentage-2"
+                                 style="height: 37px; border: 1px solid #2b3553; cursor: pointer">
+                                <i class="fa fa-copy"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <label>3%</label>
+                        <div class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-value="getAccountPercentage(3)"
+                                   id="percentage-3"
+                                   readonly />
+                            <div class="input-group-text"
+                                 ngclipboard
+                                 data-clipboard-target="#percentage-3"
+                                 style="height: 37px; border: 1px solid #2b3553; cursor: pointer">
+                                <i class="fa fa-copy"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-3">
+                        <label>Data e hora</label>
+                        <input type="text"
+                               ng-model="EntryData.DateAndTime"
+                               class="form-control"
+                               placeholder="Data e hora"
+                               data-date-time-picker
+                               required />
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <label>Paridade</label>
+                        <select ng-model="EntryData.ParityId"
+                                ng-options="parity.ParityId as parity.Name for parity in ParitiesCombobox"
+                                class="form-control"
+                                required></select>
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <label>Valor</label>
+                        <input type="number"
+                               ng-model="EntryData.Value"
+                               step="0.01"
+                               min="0"
+                               class="form-control"
+                               placeholder="Valor" required />
+                    </div>
+                    <div class="col-md-12 col-lg-3">
+                        <label>Payout (%)</label>
+                        <input type="number"
+                               min="0"
+                               max="100"
+                               ng-model="EntryData.Payout"
+                               class="form-control"
+                               placeholder="Payout"
+                               required />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Anotações</label>
+                        <textarea rows="5"
+                                  ng-model="EntryData.Summary"
+                                  class="form-control"
+                                  placeholder="Anotações"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-fill btn-success" ng-disabled="accountForm.$invalid" ng-click="save(true)">WIN</button>
+                <button type="submit" class="btn btn-fill btn-danger" ng-disabled="accountForm.$invalid" ng-click="save(false)">LOSS</button>
+            </div>
+        </div>
+    </form>
+    <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+</div>

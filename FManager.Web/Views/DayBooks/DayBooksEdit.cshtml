@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+
+<div ng-controller="DayBooksCtrl">
+    <form name="DayBookForm" ng-submit="save()">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="title">
+                    {{entityId ? 'EDITAR' : 'NOVO'}}
+                    DIÁRIO
+                </h4>
+                <button type="button" class="close" ng-click="dismissModal()">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Nome</label>
+                        <input type="text" ng-model="DayBookData.Name" class="form-control" placeholder="Nome" />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-fill btn-info">Salvar</button>
+            </div>
+        </div>
+    </form>
+    <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+</div>

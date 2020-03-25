@@ -1,0 +1,66 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="row" ng-controller="UsersCtrl as vm">
+    <div class="col-sm-8 col-md-6" id="login-container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="title">NOVA CONTA</h4>
+            </div>
+            <div class="card-body">
+                <form name="usersForm" ng-submit="vm.save()">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Nome</label>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Nome"
+                                   ng-model="vm.UserData.Name"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>E-mail</label>
+                            <input type="email"
+                                   class="form-control"
+                                   placeholder="E-mail"
+                                   ng-model="vm.UserData.Email"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Senha</label>
+                            <input type="password"
+                                   class="form-control"
+                                   placeholder="Senha"
+                                   ng-model="vm.UserData.Password"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Confirmar Senha</label>
+                            <input type="password"
+                                   class="form-control"
+                                   placeholder="Confirmar Senha"
+                                   ng-model="vm.UserData.ConfirmPassword"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit"
+                                    class="btn btn-info"
+                                    ng-disabled="vm.UserData.Password !== vm.UserData.ConfirmPassword">Salvar</button>
+                            <a href="#/" class="float-right" style="margin-top: 15px">Voltar para o login</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <loading-indicator busy="vm.showLoadingIndicator"></loading-indicator>
+</div>

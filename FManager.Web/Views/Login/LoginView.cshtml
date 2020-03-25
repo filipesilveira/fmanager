@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="row" ng-controller="LoginCtrl as vm">
+    <div class="col-sm-8 col-md-6" id="login-container">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="title">FMANAGER</h4>
+            </div>
+            <div class="card-body">
+                <form name="loginForm" ng-submit="vm.login()">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>E-mail</label>
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="E-mail"
+                                   ng-model="vm.LoginData.Email"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Senha</label>
+                            <input type="password"
+                                   class="form-control"
+                                   placeholder="Senha"
+                                   ng-model="vm.LoginData.Password"
+                                   required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-info">Acessar</button>
+                            <a href="#/newuser" class="float-right" style="margin-top: 15px">Criar conta</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <loading-indicator busy="vm.showLoadingIndicator"></loading-indicator>
+</div>

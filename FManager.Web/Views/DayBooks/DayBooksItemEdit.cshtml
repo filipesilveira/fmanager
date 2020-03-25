@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+
+<div ng-controller="DayBookItemsCtrl">
+    <form name="DayBookItemForm" ng-submit="save()">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="title">
+                    {{entityId ? 'EDITAR' : 'NOVA'}}
+                    ANOTAÇÃO
+                </h4>
+                <button type="button" class="close" ng-click="dismissModal()">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12" style="max-width: 120px">
+                        <label>Data</label>
+                        <input type="text" data-date-picker ng-model="DayBookItemData.Date" class="form-control" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Anotações</label>
+                        <textarea rows="10" 
+                                  ng-model="DayBookItemData.Note" 
+                                  class="form-control" 
+                                  placeholder="Anotações"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-fill btn-info">Salvar</button>
+            </div>
+        </div>
+    </form>
+    <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+</div>

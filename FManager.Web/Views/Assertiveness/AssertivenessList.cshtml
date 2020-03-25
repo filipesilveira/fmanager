@@ -1,0 +1,139 @@
+﻿@{
+    Layout = null;
+}
+<div ng-controller="AssertivenessCtrl">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Filtros
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12" style="max-width: 170px">
+                            <label>Data inicial</label>
+                            <input data-date-picker
+                                   type="text"
+                                   ng-model="AssertivenessData.StartDate"
+                                   class="form-control" />
+                        </div>
+                        <div class="col-md-12" style="max-width: 170px">
+                            <label>Data final</label>
+                            <input data-date-picker
+                                   type="text"
+                                   ng-model="AssertivenessData.EndDate"
+                                   class="form-control" />
+                        </div>
+                        <div class="col-md-12" style="max-width: 170px">
+                            <label>Dia da semana</label>
+                            <select ng-model="AssertivenessData.DayOfWeek"
+                                    ng-options="dayOfWeek.DayOfWeekId as dayOfWeek.Name for dayOfWeek in DayOfWeekCombobox"
+                                    class="form-control"></select>
+                        </div>
+                        <div class="col-md-12" style="max-width: 245px">
+                            <label>Paridade</label>
+                            <select ng-model="AssertivenessData.ParityId"
+                                    ng-options="parity.ParityId as parity.Name for parity in ParitiesCombobox"
+                                    class="form-control"></select>
+                        </div>
+                        <div class="col-md-12" style="max-width: 240px">
+                            <label>Conta</label>
+                            <select ng-model="AssertivenessData.AccountId"
+                                    ng-options="account.AccountId as account.Broker for account in AccountsCombobox"
+                                    class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button"
+                                    class="btn btn-sm btn-fill btn-info"
+                                    ng-click="paginate()">
+                                Buscar
+                            </button>
+                            <button type="button"
+                                    class="btn btn-sm btn-fill btn-info"
+                                    ng-click="AssertivenessData = {}">
+                                Limpar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="Assertiveness" style="margin-bottom: 30px; padding-right: 15px; padding-left: 15px">
+        <div class="col-xs-6 col-sm-6 col-md-3" style="max-width:250px">
+            <h5 style="margin-bottom:5px">% de Acertividade</h5>
+            <h3 class="card-title"
+                ng-class="{'text-success': Assertiveness.Wins >= Assertiveness.Losses, 'text-danger': Assertiveness.Wins < Assertiveness.Losses}"
+                style="display:inline">
+                {{Assertiveness.Percentage}}%
+            </h3>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3" style="max-width:250px">
+            <h5 style="margin-bottom:5px">Número de Wins</h5>
+            <h3 class="card-title"
+                style="display:inline">
+                {{Assertiveness.Wins}}
+            </h3>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3" style="max-width:250px">
+            <h5 style="margin-bottom:5px">Número de Losses</h5>
+            <h3 class="card-title"
+                style="display:inline">
+                {{Assertiveness.Losses}}
+            </h3>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3" style="max-width:250px">
+            <h5 style="margin-bottom:5px">Número de Operações</h5>
+            <h3 class="card-title"
+                style="display:inline">
+                {{Assertiveness.Entries}}
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        Resultados
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table ng-table="assertivenessTableParams" class="table tablesorter" style="margin: 0">
+                                <tr ng-repeat="assertiveness in $data">
+                                    <td title="'Paridade'" sortable="'ParityName'">
+                                        {{::assertiveness.ParityName}}
+                                    </td>
+                                    <td title="'% de acertividade'" sortable="'Percentage'">
+                                        <span ng-class="{'text-success': assertiveness.TotalWin >= assertiveness.TotalLoss, 'text-danger': assertiveness.TotalWin < assertiveness.TotalLoss}">
+                                            {{::assertiveness.Percentage}}%
+                                        </span>
+                                    </td>
+                                    <td title="'Número de wins'" sortable="'TotalWin'">
+                                        {{::assertiveness.TotalWin}}
+                                    </td>
+                                    <td title="'Número de losses'" sortable="'TotalLoss'">
+                                        {{::assertiveness.TotalLoss}}
+                                    </td>
+                                    <td title="'Número de operações'" sortable="'TotalEntries'">
+                                        {{::assertiveness.TotalEntries}}
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="text-center" ng-if="!Assertiveness" style="margin-bottom: 15px">
+                                <label>Nenhum resultado encontrado.</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+</div>

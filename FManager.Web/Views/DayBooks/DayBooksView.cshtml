@@ -1,0 +1,88 @@
+﻿@{
+    Layout = null;
+}
+<div ng-controller="DayBooksViewCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">
+                        <i class="tim-icons icon-book-bookmark text-info"></i>
+                        {{DayBookData.Name}}
+                    </h4>
+                    <a href="/#/daybooks" class="close">
+                        <i class="tim-icons icon-simple-remove"></i>
+                    </a>
+                    <button type="button"
+                            class="text-danger close"
+                            style="margin-right: 10px"
+                            ng-click="delete()">
+                        <i class="tim-icons icon-trash-simple"></i>
+                    </button>
+                    <button type="button"
+                            class="text-info close"
+                            style="margin-right: 10px"
+                            ng-click="edit()">
+                        <i class="tim-icons icon-pencil"></i>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <button type="button"
+                            class="btn btn-sm btn-fill btn-info"
+                            ng-click="addItem()">
+                        + Novo Item
+                    </button>
+                    <a href="/#/daybooks" class="btn btn-sm btn-fill btn-info">
+                        Voltar para lista
+                    </a>
+                    <table class="table tablesorter">
+                        <thead class=" text-primary">
+                            <tr>
+                                <th style="width: 200px">
+                                    Data
+                                </th>
+                                <th>
+                                    Anotações
+                                </th>
+                                <th style="width: 110px">
+                                    Ações
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="dayBookItem in dayBookItems">
+                                <td>
+                                    {{dayBookItem.Date | date:"MM/dd/yyyy"}}
+                                </td>
+                                <td>
+                                    {{dayBookItem.Note}}
+                                </td>
+                                <td>
+                                    <button type="button"
+                                            class="btn btn-link text-info"
+                                            ng-click="editItem(dayBookItem.DayBookItemId)">
+                                        <i class="tim-icons icon-pencil"></i>
+                                    </button>
+                                    <button type="button"
+                                            class="btn btn-link text-danger"
+                                            ng-click="deleteItem(dayBookItem.DayBookItemId)">
+                                        <i class="tim-icons icon-trash-simple"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button"
+                            class="btn btn-sm btn-fill btn-info"
+                            ng-click="addItem()">
+                        + Novo Item
+                    </button>
+                    <a href="/#/daybooks" class="btn btn-sm btn-fill btn-info">
+                        Voltar para lista
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <loading-indicator busy="showLoadingIndicator"></loading-indicator>
+</div>
